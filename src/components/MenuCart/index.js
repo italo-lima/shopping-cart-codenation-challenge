@@ -3,6 +3,7 @@ import { useSelector } from "react-redux"
 
 import {ArrowToLeft} from "@styled-icons/boxicons-regular"
 import {AddCircleOutline, RemoveCircleOutline} from "@styled-icons/material"
+import {countProducts} from "../../utils/countProducts"
 
 import {
     ButtonIcon, 
@@ -22,6 +23,7 @@ import Menu from "../Menu"
 export default function Cart({handleSetToggleCart}){
 
     const productsCart = useSelector(state => state.cart);
+    const sizeProducts = countProducts(productsCart)
 
     const CardProduct = product => {
         console.log(product.code_color+product.sizeProductSelected)
@@ -66,7 +68,7 @@ export default function Cart({handleSetToggleCart}){
                 <ButtonIcon onClick={handleSetToggleCart}>
                     <ArrowToLeft size={26} />
                 </ButtonIcon>
-                <div>{`Salcola (${productsCart.length})`}</div>
+                <div>{`Salcola (${sizeProducts})`}</div>
             </HeaderMenu>
             <Container>
                 <CardProducts>

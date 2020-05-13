@@ -22,7 +22,8 @@ export default function HeaderApp() {
     setToogleCart(!toggleCart)
   }
 
-  const sizeProducts = useSelector(state => state.cart.length)
+  const products = useSelector(state => state.cart)
+  const sizeProducts = countProducts(products)
 
   return(
     <Header>
