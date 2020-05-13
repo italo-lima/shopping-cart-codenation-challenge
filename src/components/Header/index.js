@@ -43,8 +43,8 @@ export default function HeaderApp() {
           </HeaderIcons>
         </div>
       </Container>
-      {toggleSearch && <MenuSearch handleSetToggleSearch={handleSetToggleSearch}/> }
-      {toggleCart && <MenuCart handleSetToggleCart={handleSetToggleCart}/> }
+      {toggleSearch && <MenuSearch toggle={toggleSearch} handleSetToggleSearch={handleSetToggleSearch}/> }
+      {toggleCart && <MenuCart toggle={toggleCart} handleSetToggleCart={handleSetToggleCart}/> }
     </Header>
   )
 }

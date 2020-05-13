@@ -16,7 +16,7 @@ import api from "../../services/api"
 import {convertToSlug} from "../../utils/convertSlug"
 import Menu from "../Menu"
 
-export default function MenuSearch({handleSetToggleSearch}){
+export default function MenuSearch({toggle, handleSetToggleSearch}){
 
     const [searchProducts, setSearchProducts] = useState([])
 
@@ -59,7 +59,7 @@ export default function MenuSearch({handleSetToggleSearch}){
     }
 
     return(
-        <Menu>
+        <Menu toggle={toggle}>
           <HeaderMenu>
             <ButtonIcon onClick={handleSetToggleSearch}>
                 <ArrowToLeft size={26} />

@@ -1,8 +1,8 @@
 import React, {useState} from "react"
+import { useDispatch } from "react-redux"
 
 import {Container, ProductContent, TitleProduct, PricingProduct, SizeProduct,ProductAction} from "./styles"
-
-import { useDispatch } from "react-redux"
+import * as CartActions from "../../store/modules/cart/actions"
 
 export default function InfoProduct({ location: { state }}){
 
@@ -17,11 +17,7 @@ export default function InfoProduct({ location: { state }}){
       return;
     }
     
-    dispatch({
-      type: 'ADD_TO_CART',
-      product,
-      sizeProductSelected
-    })
+    dispatch(CartActions.addToCart(product, sizeProductSelected))
   }
 
   return (

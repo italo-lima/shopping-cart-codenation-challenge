@@ -19,14 +19,22 @@ import {
     Footer
 } from "./styles"
 import Menu from "../Menu"
+import * as CartAction from "../../store/modules/cart/actions"
 
-export default function Cart({handleSetToggleCart}){
+export default function Cart({toggle, handleSetToggleCart}){
     const dispacth = useDispatch()
     const productsCart = useSelector(state => state.cart);
     const sizeProducts = countProducts(productsCart)
 
+    function increment(product){
+        dispacth(CartAction.updateAmount(product.code_color, product.sizeProductSelected, product.amount+1))
+    }
+
+    function decrement(product){
+        dispacth(CartAction.updateAmount(product.code_color, product.sizeProductSelected, product.amount-1))
+    }
+
     const CardProduct = product => {
-        console.log(product.code_color+product.sizeProductSelected)
         return <ListProductItem key={product.code_color+product.sizeProductSelected}>
                     <div>
                         <figure>
@@ -42,11 +50,11 @@ export default function Cart({handleSetToggleCart}){
                             <p>{product.name}</p>
                             <span>Tam: {product.sizeProductSelected}</span>
                             <ActionsProduct>
-                                <button type="button">
+                                <button type="submit" onClick={() => decrement(product)}>
                                     <RemoveCircleOutline size={24} color="#000"/>
                                 </button>
                                 <h3>{product.amount}</h3>
-                                <button type="button">
+                                <button type="submit" onClick={() => increment(product)}>
                                     <AddCircleOutline size={24} color="#000"/>
                                 </button>
                             </ActionsProduct>
@@ -57,11 +65,8 @@ export default function Cart({handleSetToggleCart}){
                         </Prices>
                     </div>
                     <div>
-                        <RemoveButton onClick={() => dispacth({ 
-                                                        type: 'REMOVE_FROM_CART', 
-                                                        id: product.code_color, 
-                                                        sizeProductSelected: product.sizeProductSelected
-                                                    })
+                        <RemoveButton onClick={() => dispacth(
+                                                    CartAction.removeFromCart(product.code_color, product.sizeProductSelected))
                                                 }
                                       type="submit" >
                             Remover Produto
@@ -71,7 +76,7 @@ export default function Cart({handleSetToggleCart}){
     }
 
     return(
-        <Menu>
+        <Menu toggle={toggle}>
             <HeaderMenu>
                 <ButtonIcon onClick={handleSetToggleCart}>
                     <ArrowToLeft size={26} />
