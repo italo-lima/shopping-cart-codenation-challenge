@@ -113,7 +113,7 @@ export const ProductAction = styled.div`
     left: 0;
     padding: 0.8rem 1rem;
     width: 100%;
-    z-index: 10;
+    z-index: 5;
 
   button {
     background-color: #212529;

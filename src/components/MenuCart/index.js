@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import {ArrowToLeft} from "@styled-icons/boxicons-regular"
 import {AddCircleOutline, RemoveCircleOutline} from "@styled-icons/material"
 import {countProducts} from "../../utils/countProducts"
+import {formatPrice} from "../../utils/formatPrice"
 
 import {
     ButtonIcon, 
@@ -25,6 +26,13 @@ export default function Cart({toggle, handleSetToggleCart}){
     const dispacth = useDispatch()
     const productsCart = useSelector(state => state.cart);
     const sizeProducts = countProducts(productsCart)
+    const total = useSelector(state => formatPrice(
+        state.cart.reduce((total, product) => {
+        const [,price] = product.actual_price.split("R$")
+
+        return total + (parseFloat(price) * product.amount)
+    }, 0))
+    )
 
     function increment(product){
         dispacth(CartAction.updateAmount(product.code_color, product.sizeProductSelected, product.amount+1))
@@ -94,7 +102,7 @@ export default function Cart({toggle, handleSetToggleCart}){
                         }
                     </ListProducts>
                     <Footer>
-                        <div>Subtotal - R$ 149,90 </div>
+                    <div>{`Subtotal - R$ ${total}`}</div>
                     </Footer>
                 </CardProducts>
             </Container>

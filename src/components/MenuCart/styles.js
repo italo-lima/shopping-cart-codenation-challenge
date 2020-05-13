@@ -157,7 +157,6 @@ export const Footer = styled.div`
     padding: 0.5rem 1rem;
     position: fixed;
     width: 100%;
-    max-width: 375px;
 
     div {
         font-size: 0.9rem;
