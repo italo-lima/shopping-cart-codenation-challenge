@@ -1,5 +1,5 @@
 import React from "react"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 
 import {ArrowToLeft} from "@styled-icons/boxicons-regular"
 import {AddCircleOutline, RemoveCircleOutline} from "@styled-icons/material"
@@ -21,7 +21,7 @@ import {
 import Menu from "../Menu"
 
 export default function Cart({handleSetToggleCart}){
-
+    const dispacth = useDispatch()
     const productsCart = useSelector(state => state.cart);
     const sizeProducts = countProducts(productsCart)
 
@@ -57,7 +57,15 @@ export default function Cart({handleSetToggleCart}){
                         </Prices>
                     </div>
                     <div>
-                        <RemoveButton type="submit">Remover Produto</RemoveButton>
+                        <RemoveButton onClick={() => dispacth({ 
+                                                        type: 'REMOVE_FROM_CART', 
+                                                        id: product.code_color, 
+                                                        sizeProductSelected: product.sizeProductSelected
+                                                    })
+                                                }
+                                      type="submit" >
+                            Remover Produto
+                        </RemoveButton>
                     </div>
                 </ListProductItem>
     }
