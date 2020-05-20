@@ -13,11 +13,12 @@ import {convertToSlug} from "../../utils/convertSlug"
 
 export default function Home(){
 
-  const [catalog, setCatalog] = useState({data:[], loading: false})
+  const [catalog, setCatalog] = useState([])
+  const [loadingCatalog, setLoadingCatalog] = useState(false)
   const [countCatalog, setCountCatalog] = useState(0)
 
   const loadRepo = useCallback(async () => {
-    setCatalog({...catalog, loading: true})
+    setLoadingCatalog(true)
     const response = await api.get('/catalog')
     setCountCatalog(response.data.length)
 
@@ -26,22 +27,24 @@ export default function Home(){
         slug: convertToSlug(element.name),
     }));
 
-    setCatalog({data, loading: false})
-  }
+    setCatalog(data)
+    setLoadingCatalog(false)
+  }, []
   )
   
   useEffect(() => {
     loadRepo()
-  }, [])
+  }, [loadRepo])
 
   return(
     <>
+    {console.log("state", loadingCatalog)}
       <Products>
-        {catalog.loading && <Loading />}
+        {loadingCatalog && <Loading />}
         <Container>
           <div>{countCatalog} itens</div>
           <GridCatalog>
-            {catalog.data && catalog.data.map(element => (
+            {catalog && catalog.map(element => (
               <Card 
                 key={element.code_color}
                 element={element}
