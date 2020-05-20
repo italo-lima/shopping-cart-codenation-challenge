@@ -1,10 +1,11 @@
 import produce from "immer"
+import {saveLocalStorageProducts} from "../../../utils/saveLocalStorageProducts"
 
 export default function cart(state=[], action) {
 
   switch(action.type){
-    case 'ADD_TO_CART':
-      return produce(state, draft => {
+    case 'ADD_TO_CART': {
+      const newProduct = produce(state, draft => {
         const productIndex = draft.findIndex(p => (
           (p.code_color === action.product.code_color) && 
           (p.sizeProductSelected === action.sizeProductSelected))
@@ -20,8 +21,14 @@ export default function cart(state=[], action) {
           })
         }
       })
-    case 'REMOVE_FROM_CART':
-      return produce(state, draft => {
+
+      saveLocalStorageProducts(newProduct)
+      return newProduct
+    }
+
+
+    case 'REMOVE_FROM_CART': {
+      const products =  produce(state, draft => {
         const productIndex = draft.findIndex(p => (
           (p.code_color === action.id) && 
           (p.sizeProductSelected === action.sizeProductSelected))
@@ -32,8 +39,13 @@ export default function cart(state=[], action) {
         }
       })
 
-      case 'UPDATE_AMOUNT_CART':
-        return produce(state, draft => {
+      saveLocalStorageProducts(products)
+      return products
+    }
+
+
+      case 'UPDATE_AMOUNT_CART': {
+        const products = produce(state, draft => {
           if(action.amount <=0 ){
             return state;
           }
@@ -47,6 +59,14 @@ export default function cart(state=[], action) {
             draft[productIndex].amount = Number(action.amount)
           }
         })
+        saveLocalStorageProducts(products)
+        return products
+      }
+
+      case 'ADD_TO_CART_LOCALSTORAGE':
+        return produce(state, draft => {
+          draft.push(action.product)
+          } )
 
     default:
       return state;

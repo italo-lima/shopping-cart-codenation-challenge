@@ -51,7 +51,7 @@ export default function InfoProduct({ location: { state }}){
                       >
                         {size}
                       </button>
-                } 
+                }
           })}
         </SizeProduct>
         {}

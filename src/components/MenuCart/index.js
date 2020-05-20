@@ -22,11 +22,11 @@ import {
 import Menu from "../Menu"
 import * as CartAction from "../../store/modules/cart/actions"
 
-export default function Cart({toggle, handleSetToggleCart}){
+export default function Cart({style, toggle, handleSetToggleCart}){
     const dispacth = useDispatch()
     const productsCart = useSelector(state => state.cart);
     const sizeProducts = countProducts(productsCart)
-    const total = useSelector(state => formatPrice(
+    const totalProducts = useSelector(state => formatPrice(
         state.cart.reduce((total, product) => {
         const [,price] = product.actual_price.split("R$")
 
@@ -42,7 +42,7 @@ export default function Cart({toggle, handleSetToggleCart}){
         dispacth(CartAction.updateAmount(product.code_color, product.sizeProductSelected, product.amount-1))
     }
 
-    const CardProduct = product => {
+    const cardProduct = product => {
         return <ListProductItem key={product.code_color+product.sizeProductSelected}>
                     <div>
                         <figure>
@@ -84,25 +84,25 @@ export default function Cart({toggle, handleSetToggleCart}){
     }
 
     return(
-        <Menu toggle={toggle}>
+        <Menu style={style} toggle={toggle}>
             <HeaderMenu>
                 <ButtonIcon onClick={handleSetToggleCart}>
                     <ArrowToLeft size={26} />
                 </ButtonIcon>
-                <div>{`Salcola (${sizeProducts})`}</div>
+                <div>{`Sacola (${sizeProducts})`}</div>
             </HeaderMenu>
             <Container>
                 <CardProducts>
                     <ListProducts>
                         {productsCart.length ? 
-                            productsCart.map(product => CardProduct(product)) :
+                            productsCart.map(product => cardProduct(product)) :
                             <h1 style={{textAlign: "center", color: "#a7a7a7", fontSize: "1rem", paddingTop: '1rem'}}>
                                 Nenhum Produto no Carrinho
                             </h1>  
                         }
                     </ListProducts>
                     <Footer>
-                    <div>{`Subtotal - R$ ${total}`}</div>
+                    <div>{`Subtotal - R$ ${totalProducts}`}</div>
                     </Footer>
                 </CardProducts>
             </Container>

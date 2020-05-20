@@ -22,3 +22,11 @@ export function updateAmount(id, sizeProductSelected, amount){
     amount
   }
 }
+
+export function productsStorage(product){
+  return {
+    type: 'ADD_TO_CART_LOCALSTORAGE',
+    product
+  }
+}
+

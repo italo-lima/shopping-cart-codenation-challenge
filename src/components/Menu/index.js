@@ -2,13 +2,13 @@ import React from "react"
 
 import { Container, ModalOpacity } from "./styles"
 
-export default function Menu({toggle,children}){
+export default function Menu({style, toggle, children}){
     return (
         <>
-        <Container toggle={toggle}>
+        <Container style={style} toggle={toggle}>
             {children}
         </Container>
-        <ModalOpacity />
+        {toggle && <ModalOpacity />}
         </>
     )
 }

@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from "react"
+import React, {useEffect, useState, useCallback} from "react"
 
-import Header from "../../components/Header"
 import Loading from "../../components/Loading"
 import Card from "../../components/Card"
 import {
@@ -11,12 +10,13 @@ import {
 import api from "../../services/api"
 import {convertToSlug} from "../../utils/convertSlug"
 
+
 export default function Home(){
 
   const [catalog, setCatalog] = useState({data:[], loading: false})
   const [countCatalog, setCountCatalog] = useState(0)
 
-  async function loadRepo(){
+  const loadRepo = useCallback(async () => {
     setCatalog({...catalog, loading: true})
     const response = await api.get('/catalog')
     setCountCatalog(response.data.length)
@@ -28,7 +28,8 @@ export default function Home(){
 
     setCatalog({data, loading: false})
   }
-
+  )
+  
   useEffect(() => {
     loadRepo()
   }, [])

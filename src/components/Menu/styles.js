@@ -1,6 +1,7 @@
 import styled from "styled-components"
+import { animated} from "react-spring"
 
-export const Container = styled.div`
+export const Container = styled(animated.div)`
   box-shadow: 0 19px 38px rgba(0,0,0,.3), 0 15px 12px rgba(0,0,0,.22);
   background: #fff;
   display: flex;
@@ -10,8 +11,7 @@ export const Container = styled.div`
   top: 0;
   width: 100%;
   z-index: 20;
-  transform: ${({ toggle }) => toggle ? 'translateX(0)' : 'translateX(-100%)'};
-  transition: transform 0.3s ease-in-out;
+  right: 0;
 
 @media only screen and (min-width: 1280px){
   width: 375px;

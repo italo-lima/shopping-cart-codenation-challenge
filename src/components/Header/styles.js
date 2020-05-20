@@ -42,6 +42,7 @@ export const ButtonIcon = styled.button`
   background-color: transparent;
   margin-right: 15px;
   transaction: opacity 0.2s;
+  position: relative;
 
   &:hover{
     opacity: 0.7;
@@ -52,10 +53,10 @@ export const ButtonIcon = styled.button`
   }
 
     sup {
-      overflow: hidden;
       position: absolute;
-      right: 0.5rem;
-      top: 20px;
+      top: 0;
+      right: -10px !important;
+      overflow: hidden;
       height: 1.3rem;
       border-radius: 50%;
       width: 1.3rem;

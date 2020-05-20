@@ -3,6 +3,8 @@ import {Link} from "react-router-dom"
 
 import {Card, ImageProduct,Price, Badge} from "./styles"
 
+const noImage = "https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+Indisponível"
+
 export default function CardProduct({element}){
   const [selected, setSelected] = useState({})
 
@@ -19,7 +21,7 @@ export default function CardProduct({element}){
             <img 
               src={element.image ? 
                 element.image :
-                "https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+Indisponível" 
+                noImage 
               }
               title={element.name} 
               />
