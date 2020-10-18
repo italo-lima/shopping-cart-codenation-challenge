@@ -80,7 +80,7 @@ export default function InfoProduct({ location: { state } }) {
               return null;
             })}
           </SizeProduct>
-          {}
+
           <ProductAction>
             <button type="button" onClick={() => handleAddProduct(state)}>
               Adicionar à Sacola

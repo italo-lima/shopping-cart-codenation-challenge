@@ -1,7 +1,7 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const Products = styled.section`
-  padding: 1rem 0;
+  padding: 3.5rem 1rem 0;
 `;
 
 export const Container = styled.div`
@@ -9,22 +9,22 @@ export const Container = styled.div`
   margin: 0 auto;
   width: 100%;
 
-  &>div:nth-child(1){
+  & > div:nth-child(1) {
     color: #a7a7a7;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 400;
     display: inline-block;
-    padding-top: .7rem;
-    padding-bottom: .7rem;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
     margin: 0 auto;
-}
+  }
 
-@media only screen and (min-width: 1280px){
+  @media only screen and (min-width: 1280px) {
     width: 1280px;
-    
-    &>div:nth-child(1){
-      -webkit-transform: translate3d(calc(-50% - 30px),0,0);
-      transform: translate3d(calc(-50% - 30px),0,0);
+
+    & > div:nth-child(1) {
+      -webkit-transform: translate3d(calc(-50% - 30px), 0, 0);
+      transform: translate3d(calc(-50% - 30px), 0, 0);
     }
   }
 `;
