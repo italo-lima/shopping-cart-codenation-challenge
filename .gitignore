@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-yarn.*
+.env
 
 # production
 /build
