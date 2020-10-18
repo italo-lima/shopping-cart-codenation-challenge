@@ -1,8 +1,4 @@
 export const convertToSlug = (Text) =>
-{
-    return Text
-        .toLowerCase()
-        .replace(/[^\w ]+/g,'')
-        .replace(/ +/g,'-')
-        ;
-}
+  Text.toLowerCase()
+    .replace(/[^\w ]+/g, "")
+    .replace(/ +/g, "-");

@@ -1,37 +1,33 @@
-import React, {useState, useEffect} from "react"
-import {Link} from "react-router-dom"
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-import {Card, ImageProduct,Price, Badge} from "./styles"
+import { Card, ImageProduct, Price, Badge } from "./styles";
 
-const noImage = "https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+Indisponível"
-
-export default function CardProduct({element}){
-  const [selected, setSelected] = useState({})
+export default function CardProduct({ element }) {
+  const [selected, setSelected] = useState({});
 
   useEffect(() => {
-    setSelected(element)
-  }, [element])
+    setSelected(element);
+  }, [element]);
 
-  return(
+  return (
     <Card>
-      {selected.name && 
-        <Link to={{pathname:`/produto/${element.slug}`, state: element}} >
+      {selected.name && (
+        <Link to={{ pathname: `/produto/${element.slug}`, state: element }}>
           <ImageProduct>
-          {element.on_sale && <Badge> -{element.discount_percentage}</Badge>}
-            <img 
-              src={element.image ? 
-                element.image :
-                noImage 
-              }
-              title={element.name} 
-              />
+            {element.on_sale && <Badge> -{element.discount_percentage}</Badge>}
+            <img
+              src={element.image || process.env.REACT_APP_URL_PRODUCT_NOT_FOUND}
+              alt={element.name}
+            />
           </ImageProduct>
           <h3>{element.name}</h3>
           <Price sale={element.on_sale}>
             <span>{element.regular_price}</span>
             {element.on_sale && <span>{element.actual_price}</span>}
           </Price>
-        </Link>}
+        </Link>
+      )}
     </Card>
-  )
+  );
 }
