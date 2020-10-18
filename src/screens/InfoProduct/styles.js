@@ -11,12 +11,12 @@ export const Container = styled.div`
   figure {
     width: 100%;
     height: 100%;
-    max-height: 680px;
+    max-height: 580px;
   }
 
   img {
     width: 100%;
-    max-height: 680px;
+    max-height: 580px;
   }
 
   @media only screen and (min-width: 1280px) {
@@ -25,7 +25,7 @@ export const Container = styled.div`
     padding: 3.5rem 1rem 2rem 1rem;
 
     figure {
-      width: 50%;
+      width: 40%;
     }
   }
 `;
